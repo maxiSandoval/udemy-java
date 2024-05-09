@@ -1,6 +1,7 @@
 package com.udemy.java.pages;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,12 +26,12 @@ public class TableDemoPage {
     }
 
 
-    public void checkBoxes(String gender){
+    public void selectRows(Predicate<List<WebElement>> predicate){
         tableRow.stream()
                 .skip(1)
                 .map(trList -> trList.findElements(By.tagName("td")))
                 .filter(tdList -> tdList.size() == 4) // validate empty td
-                .filter(tdList -> tdList.get(1).getText().equalsIgnoreCase(gender))
+                .filter(predicate)
                 .map(tdList -> tdList.get(3))
                 .map(td -> td.findElement(By.tagName("input")))
                 .forEach(WebElement::click);
