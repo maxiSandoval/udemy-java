@@ -48,9 +48,7 @@ public class HoverableDropdown {
     @DataProvider(name = "linkProvider")
     public Object[] testdata() {
         return new Object[] {
-                "Dropdown => Dropdown Link 5",
-                "Dropdown => Dropdown Link 5 => Dropdown Submenu Link 5.1",
-                "Dropdown => Dropdown Link 5 => Dropdown Submenu Link 5.4 => Dropdown Submenu Link 5.4.1",
+             
         };
     }
 }

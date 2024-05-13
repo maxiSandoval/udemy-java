@@ -24,14 +24,22 @@ public class DriverFactory {
         return new EdgeDriver();
     };
 
-    private static final Map<String, Supplier<WebDriver>> MAP = new HashMap<>();
+    /*
+     * private static final Map<String, Supplier<WebDriver>> MAP = new HashMap<>();
+     * 
+     * static {
+     * MAP.put("chrome", chromeSupplier);
+     * MAP.put("edge", edgeSupplier);
+     * }
+     */
 
-    static {
-        MAP.put("chrome", chromeSupplier);
-        MAP.put("edge", edgeSupplier);
-    }
+    //java 9 approach
+    private static final Map<String, Supplier<WebDriver>> MAP = Map.of(
+        "chrome", chromeSupplier,
+        "edge", edgeSupplier
+    );
 
-    public static WebDriver getDriver(String browser){
+    public static WebDriver getDriver(String browser) {
         return MAP.get(browser).get();
     }
 

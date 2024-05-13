@@ -1,5 +1,8 @@
 package com.udemy.java;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +23,7 @@ import java.util.stream.Stream;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Comparators;
+
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.udemy.java.calculator.MathOperation;
 import com.udemy.java.compare.Student;
@@ -282,38 +286,119 @@ public class TestMain {
          * System.out.println(op.get());
          */
 
-         // sum using stream
-         List<Integer> list = new ArrayList<>();
-         Collections.addAll(list, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        /*
+         * // sum using stream
+         * List<Integer> list = new ArrayList<>();
+         * Collections.addAll(list, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+         * 
+         * // 1st aproach
+         * int sum = 0;
+         * 
+         * for (int i : list) {
+         * sum = sum +i;
+         * }
+         * 
+         * // 2nd approach, stream. mapTo...
+         * // has 3 primitive types to use: int, long, double
+         * int sum = list.stream()
+         * .mapToInt(a -> a)
+         * .sum();
+         * 
+         * System.out.println(sum);
+         * 
+         * // loop can be replace for IntStream
+         * // for
+         * for (int j = 0; j < 10; j++) {
+         * System.out.println("Hello : " + j);
+         * }
+         * 
+         * // IntStream
+         * // IntStream.range(0, 10) // exclude 10
+         * IntStream.rangeClosed(1, 10) // include 10
+         * .forEach(i -> System.out.println("Hello : " + i));
+         * 
+         */
+        /*
+         * // takeWhile
+         * // It allows to stop the stream until the condition is met.
+         * // returning the values before this condition
+         * 
+         * Stream<Integer> numbers = Stream.of(4, 2, 1, 4, 5, 2, 1, 1, 2, 1, 3, 5, 2,
+         * 1);
+         * 
+         * /* System.out.println(
+         * numbers.takeWhile(i -> i < 5)
+         * .collect(Collectors.toList())
+         * 
+         * );
+         * 
+         * // dropWhile
+         * // It allows to drop values of the stream if the condition is met
+         * // returning the values where this condition started
+         * 
+         * System.out.println(
+         * numbers.dropWhile(i -> i < 5)
+         * .collect(Collectors.toList())
+         * 
+         * );
+         */
 
-       /*  // 1st aproach
-        int sum = 0;
+        /*
+         * // Factory Method: immutable List, Set, Map
+         * // it can not add, remove, it can use stream functions
+         * List<Integer> of = List.of(1, 23, 4, 5, 5);
+         * 
+         * Set<Integer> of2 = Set.of(1, 23, 4, 5, 5);
+         * 
+         * Map<String, Integer> of3 = Map.of(
+         * "a", 10,
+         * "b", 15,
+         * "c", 21);
+         */
 
-        for (int i : list) {
-            sum = sum +i;
-        } */
+        /*
+         * // use of var
+         * // has limitations
+         * // can't use it at level of class
+         * // can't use it like parameter in methods
+         * // can't use it for lambda expression
+         * // must be know what type is it when is declare
+         * //
+         * 
+         * // here we are inferring the variable type is
+         * // observation: is readable but less clear
+         * var of = List.of(1, 23, 4, 5, 5);
+         * var of3 = Map.of(
+         * "a", 10,
+         * "b", 15,
+         * "c", 21);
+         */
 
-/*         // 2nd approach, stream. mapTo...
-        // has 3 primitive types to use: int, long, double
-        int sum = list.stream()
-                        .mapToInt(a -> a)
-                        .sum();
+        /*
+         * // String methods
+         * // lines(), split by line break
+         * String str = "Hi\nhello\nhow are you?";
+         * System.out.println(str);
+         * var collect = str.lines().collect(Collectors.toList());
+         * System.out.println(collect);
+         */
 
-        System.out.println(sum); */
+/*         // repeat(), repeat a sting n times
+        String s = "Hi ";
+        System.out.println(s.repeat(5)); */
 
-        // loop can be replace for IntStream
-        // for
-        for (int j = 0; j < 10; j++) {
-            System.out.println("Hello : " + j);
-        }
+      /*   // strip(), Unlike trim, it understands Unicode characters.
+        // unicode character, double space
+        char c = '\u2002';
+        String str = c + " udemy ";
+        System.out.println("::" + str.strip() + "::"); */
 
-        // IntStream
-        // IntStream.range(0, 10) // exclude 10
-        IntStream.rangeClosed(1, 10) // include 10
-                    .forEach(i -> System.out.println("Hello : " + i));
+        // Files API
+        Path path = Paths.get("C:/Source/udemy-java/target/java-11.txt");
 
+        Files.writeString(path, "Java is cool");
 
-
+        System.out.println(Files.readString(path));
     }
 
 }
